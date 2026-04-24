@@ -51,7 +51,24 @@ function Board() {
         filterPriority === "all" ? true : t.priority === filterPriority
       );
   };
+const getLogColor = (message) => {
+  if (message.includes("created"))
+    return "bg-green-100 text-green-700";
 
+  if (message.includes("deleted"))
+    return "bg-red-100 text-red-700";
+
+  if (message.includes("moved"))
+    return "bg-blue-100 text-blue-700";
+
+  if (message.includes("edited"))
+    return "bg-yellow-100 text-yellow-700";
+
+  if (message.includes("reset"))
+    return "bg-gray-200 text-gray-700";
+
+  return "bg-gray-100 text-gray-700";
+};
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 p-4">
       
@@ -166,14 +183,24 @@ function Board() {
       </DndContext>
 
       {/* LOG */}
-      <div className="mt-8 bg-white p-5 rounded-xl shadow max-w-2xl mx-auto">
-        <h2 className="font-bold mb-3">Activity Log</h2>
-        {logs.map((log) => (
-          <div key={log.id} className="text-sm border-b py-1">
-            {log.message} - {log.time}
-          </div>
-        ))}
+      {/* LOG */}
+<div className="mt-8 bg-white p-5 rounded-xl shadow max-w-2xl mx-auto">
+  <h2 className="font-bold mb-3">Activity Log</h2>
+
+  <div className="space-y-2 max-h-60 overflow-y-auto">
+    {logs.map((log) => (
+      <div
+        key={log.id}
+        className={`p-2 rounded-lg text-sm flex justify-between ${getLogColor(
+          log.message
+        )}`}
+      >
+        <span>{log.message}</span>
+        <span className="text-xs opacity-70">{log.time}</span>
       </div>
+    ))}
+  </div>
+</div>
     </div>
   );
 }
