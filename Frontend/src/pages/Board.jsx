@@ -253,7 +253,7 @@ function TaskCard({ task }) {
       style={style}
       className={`p-4 rounded border shadow mb-2 ${getColor()}`}
     >
-      <div {...listeners} {...attributes} className="text-xs mb-2 cursor-grab">
+      <div {...listeners} {...attributes} className="text-xs mb-2 text-right cursor-grab">
         ☰ Drag
       </div>
 
